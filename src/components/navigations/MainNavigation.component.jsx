@@ -13,9 +13,10 @@ import {
 	CssBaseline,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import CommonNavButton from "../common/CommonNavButton.component";
+import { logoTheme, navBtnTheme } from "../../style/commonTheme";
 
 const navItems = ["Home", "About", "Contact"];
 const drawerWidth = 240;
@@ -23,12 +24,6 @@ const drawerWidth = 240;
 const MainNavigation = (props) => {
 	const { window } = props;
 	const [mobileOpen, setMobileOpen] = useState();
-
-	const logo = createTheme({
-		typography: {
-			fontFamily: "Montserrat, sans-serif",
-		},
-	});
 
 	// drawer toggle
 	const handleDrawerToggle = () => {
@@ -39,7 +34,7 @@ const MainNavigation = (props) => {
 	const drawer = (
 		<Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
 			<CssBaseline />
-			<ThemeProvider theme={logo}>
+			<ThemeProvider theme={logoTheme}>
 				<Toolbar className="logo" sx={{ my: 2, justifyContent: "center" }}>
 					<Typography variant="h6" sx={{ color: "#1E54A4" }}>
 						POKE
@@ -77,7 +72,7 @@ const MainNavigation = (props) => {
 			>
 				{/* logo */}
 				<Toolbar sx={{ justifyContent: "space-between" }}>
-					<ThemeProvider theme={logo}>
+					<ThemeProvider theme={logoTheme}>
 						<Toolbar className="logo">
 							<Typography variant="h4" sx={{ color: "#1E54A4" }}>
 								POKE
@@ -98,11 +93,13 @@ const MainNavigation = (props) => {
 						<MenuIcon fontSize="large" sx={{ color: "black" }} />
 					</IconButton>
 					{/* nav button */}
-					<Box sx={{ display: { xs: "none", sm: "block" } }}>
-						{navItems.map((item) => (
-							<CommonNavButton key={item} item={item} />
-						))}
-					</Box>
+					<ThemeProvider theme={navBtnTheme}>
+						<Box sx={{ display: { xs: "none", sm: "block" } }}>
+							{navItems.map((item) => (
+								<CommonNavButton key={item} item={item} />
+							))}
+						</Box>
+					</ThemeProvider>
 				</Toolbar>
 			</AppBar>
 			<Box component="nav">
